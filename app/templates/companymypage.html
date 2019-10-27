@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>re:Cruit</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/common.css', q='eeee')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/mypage.css', q='adfsa')}}">
+</head>
+<body>
+    <div class="header">
+        <a class="logo" href="/">re:Cruit</a>
+        <a class="logo_button" href="/search" type="submit">Search</a>
+
+        <span class="user">Hi, {{name}}<a class="logout" href="/">, Logout?</a></span>
+    </div>
+
+    <div class="contents">
+        <div class="right">
+            <h2>Messages</h2>
+            <p>Send messages to whom you are interested in.</p>
+            <form action="_sendtostudent" method="POST">
+                <input type="text" name="message" placeholder="        Message" />
+                <input type="text" name="sid" placeholder="        Student ID" />
+                <button type="submit">Send</button>
+            </form>
+
+            <p>Messages that Student might have Sent you</p>
+            {% for message in messages %}
+            <div class="card">
+                <p>{{message[0]}} <em>from {{message[1]}} {{message[2]}}</em></p>
+                
+                <form action="_sendtostudent/{{message[3]}}" method="POST">
+                    <input type="text" name="message" placeholder="        Reply message to {{message[1]}}" />
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="left">
+            <h2>Your Position List</h2>
+            <table>
+                <tr>
+                    <th>Position ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Required GPA</th>
+                </tr>
+                {% for position in positions %}
+                <tr>
+                    {% for element in position %}
+                    <td>{{element}}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <p>Add a Position you offer. Tell students more about what you have to offer.</p>
+            <button type="button" onClick="window.location.href='addposition'">Add Position Now</button>
+        </div>
+    </div>
+
+</body>
+</html>

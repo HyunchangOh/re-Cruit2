@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>re:Cruit</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/common.css', q='abcdafadfd')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/mypage.css', q='adfaf')}}">
+</head>
+<body>
+    <div class="header">
+        <a class="logo" href="/">re:Cruit</a>
+        <a class="logo_button" href="/search" type="submit">Search</a>
+
+        <span class="user">Hi, {{Fname}}<a class="logout" href="/">, Logout?</a></span>
+    </div>
+
+    <div class="contents">
+        <div class="right">
+            {% if positions %}
+            <h2>Positions</h2>
+            <p>Positions you may offer; Contact them via Message</p>
+            {% for position in positions %}
+            <p><strong>{{position[1]}} of {{position[0]}}</strong>: {{position[2]}}</p>
+            {% endfor %}
+            
+            <hr />
+            {% endif %}
+
+            <h2>Messages</h2>
+            <p>Send messages to whom you are interested in.</p>
+            <form action="_sendtocompany" method="POST">
+                <input type="text" name="message" placeholder="        Message" />
+                <input type="text" name="name" placeholder="        Company Name" />
+                <button type="submit">Send</button>
+            </form>
+
+            <p>Messages that Companies might have Sent you</p>
+            {% for message in messages %}
+            <div class="card">
+                <p>{{message[0]}} <em>from {{message[1]}}</em></p>
+
+                <form action="_sendtocompany/{{message[1]}}" method="POST">
+                    <input type="text" name="message" placeholder="        Reply message to {{message[1]}}" />
+                </form>
+            </div>
+            {% endfor %}
+            
+        </div>
+        <div class="left">
+            <h2>
+                Your Course List
+            </h2>
+            <table>
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Credit</th>
+                    <th>Grade</th>
+                    <th>Professor</th>
+                    <th>Year</th>
+                    <th>Semester</th>
+                </tr>
+                {% for course in courses %}
+                <tr>
+                    {% for element in course %}
+                    <td>{{element}}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <p>
+                Add a Course you took. Tell companies more about your academic abilities.
+            </p>
+            <button type="button" onClick="window.location.href='addcourse'">Add Course Now</button>
+            
+            <h2>
+                Your Work List
+            </h2>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                </tr>
+                {% for work in works %}
+                <tr>
+                    {% for element in work %}
+                    <td>{{element}}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <p>
+                Add a Work you did. Tell companies more about your experiences.
+            </p>
+            <button type="button" onClick="window.location.href='addwork'">Add Work Now</button>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>re:Cruit</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/common.css', q='abc')}}">
+</head>
+<body>
+    <!--
+        <div class="header">
+            <a class="logo" href="index.html">re:Cruit</a>
+        </div>
+    -->
+
+    <div class="contents">
+        <h1 class="centered bigger">Welcome, student</h1>
+        <p class="centered">Enter your information so that companies can find you for their job.</p>
+        <hr />
+
+        <form action="/_studentenroll" method="POST">
+            <input type="text" name="sid" placeholder="        Student ID">
+            <input type="text" name="fname" placeholder="        First Name">
+            <input type="text" name="lname" placeholder="        Last Name">
+            <input type="text" name="phone" placeholder="        Phone Number">
+            <input type="text" name="email" placeholder="        Email">
+            <input type="password" name="password" placeholder="        Password">
+            <input type="text" name="school" placeholder="        School">
+            <input type="text" name="major" placeholder="        Major">
+
+            <button type="submit">Enroll Now</button>
+        </form>
+    </div>
+
+</body>
+</html>

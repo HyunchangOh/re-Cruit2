@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>re:Cruit</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/common.css', q='adfaas')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/mypage.css', q='aaaaaaa')}}">
+</head>
+<body>
+    <div class="header">
+        <a class="logo" href="/">re:Cruit</a>
+        <a class="logo_button" href="/search" type="submit">Search</a>
+    </div>
+
+    <div class="contents">
+        <form action="/_search" method="POST">
+            <input type="text" name="query" placeholder="        Search student, company, position, course, etc." />
+            <button type="submit">Search</button>
+        </form>
+
+        <p>Search Results...</p>
+
+        {% if students %}
+        <h2>Students</h2>
+        <table class="fulltable">
+            <tr>
+                <th>Student ID</th>
+                <th>School</th>
+                <th>Email</th>
+                <th>Name</th>
+            </tr>
+            {% for student in students %}
+            <tr>
+                <td>{{student[0]}}</td>
+                <td>{{student[1]}}</td>
+                <td>{{student[2]}}</td>
+                <td>{{student[3]}} {{student[4]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+
+        {% if companies %}        
+        <h2>Companies</h2>
+        <table class="fulltable">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+            </tr>
+            {% for company in companies %}
+            <tr>
+                <td>{{company[0]}}</td>
+                <td>{{company[1]}}</td>
+                <td>{{company[2]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+
+        {% if positions %}
+        <h2>Positions</h2>
+        <table class="fulltable"> 
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Required GPA</th>
+            </tr>
+            {% for position in positions %}
+            <tr>
+                <td>{{position[0]}}</td>
+                <td>{{position[1]}}</td>
+                <td>{{position[2]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+
+        {% if courses %}
+        <h2>Courses</h2>
+        <table class="fulltable">
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Credit</th>
+                <th>Professor</th>
+            </tr>
+            {% for course in courses %}
+            <tr>
+                <td>{{course[0]}}</td>
+                <td>{{course[1]}}</td>
+                <td>{{course[2]}}</td>
+                <td>{{course[3]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+
+</body>
+</html>

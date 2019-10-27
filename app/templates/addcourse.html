@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>re:Cruit</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/common.css', q='abc')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/mypage.css')}}">
+</head>
+<body>
+    <div class="header">
+        <a class="logo" href="/">re:Cruit</a>
+        <a class="logo_button" href="/search" type="submit">Search</a>
+
+        <span class="user">Hi, {{Fname}}<a class="logout" href="/">, Logout?</a></span>
+    </div>
+
+    <div class="contents">
+        <h3>Glad to see you have taken a course. Enter course details.</h3>
+        <form action="_addcourse" method="POST">
+            <input type="text" name="code" placeholder="        Course Code">
+            <input type="text" name="name" placeholder="        Course Name">
+            <input type="text" name="credit" placeholder="        Course Credit">
+            <input type="text" name="professor" placeholder="        Course Professor">
+            <hr/>
+            <input type="text" name="grade" placeholder="        Your Grade on the Course">
+            <input type="text" name="year" placeholder="        Year you took the course">
+            <input type="text" name="semester" placeholder="        Semester you took the course">
+
+            <button type="submit">Add this course and return</button>
+        </form>
+
+        <h3>Or, browse through the courses that others have added. Input course details to find best matches.</h3>
+
+        <form action="_addcourse" method="POST">
+            <input type="text" name="code" placeholder="        Course Code">
+            <input type="text" name="name" placeholder="        Course Name">
+
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+</body>
+</html>

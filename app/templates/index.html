@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>re:Cruit</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/common.css', q='abc')}}">
+</head>
+<body>
+    <!--
+        <div class="header">
+            <a class="logo" href="index">re:Cruit</a>
+        </div>
+    -->
+
+    <div class="contents">
+        <h1 class="centered bigger">re:Cruit</h1>
+        <p class="centered">re:Cruit makes it easy to find job, and recruit people for the position you offer.</p>
+        <br/>
+
+        <h3>
+            Older here? Sign In!
+        </h3>
+
+        <form action="/_signin" method="POST">
+            <input type="text" name="userid" placeholder="        ID or Company Name">
+            <input type="password" name="userpw" placeholder="        Password">
+            <input type="radio" name="role" value="student" checked> As a student
+            <input type="radio" name="role" value="company"> As a company
+
+            <button type="submit">Sign In</button>
+        </form>
+
+        <br/>
+        <button type="button" onClick="window.location.href='/student'">Student Enroll</button>
+        <button type="button" onClick="window.location.href='/company'">Company Enroll</button>
+    </div>
+
+</body>
+</html>

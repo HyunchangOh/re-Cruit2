@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>re:Cruit</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/common.css', q='abc')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/mypage.css')}}">
+</head>
+<body>
+    <div class="header">
+        <a class="logo" href="/">re:Cruit</a>
+        <a class="logo_button" href="/search" type="submit">Search</a>
+
+        <span class="user">Hi, {{Fname}}<a class="logout" href="/">, Logout?</a></span>
+    </div>
+
+    <div class="contents">
+        <h3>Glad to see you have done some work. Enter work details.</h3>
+        <form action="_addwork" method="POST">
+            <input type="text" name="name" placeholder="        Work Name">
+            <input type="text" name="description" placeholder="        Work Description">
+            <input type="text" name="category" placeholder="        Work Category">
+
+            <button type="submit">Add this work and return</button>
+        </form>
+    </div>
+
+</body>
+</html>
