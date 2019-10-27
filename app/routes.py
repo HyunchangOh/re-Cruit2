@@ -36,14 +36,50 @@ def _signin():
 
 @app.route("/studentmypage/<sid>/<Fname>/")
 def studentmypage(sid, Fname):
-    # userlist = connect_users()
-    # print(userlist)
-    # print(sid)
     global current_user
-    return render_template("studentmypage.html", sid = sid, Fname = Fname, courses=current_user['courses'])
-    for user in userlist:
-        if int(sid) == int(user['sid']):
-            courses = user['courses']
-            return render_template("studentmypage.html", sid = sid, Fname = Fname, courses=courses)
-    return redirect(url_for('index'))
-    
+    if current_user and current_user["sid"]==sid:
+        return render_template("studentmypage.html", sid = sid, Fname = Fname, courses=current_user['courses'], works=current_user['works'])
+    else:
+        userlist = connect_users()
+        for user in userlist:
+            if int(sid) == int(user['sid']):
+                courses = user['courses']
+                works = user['works']
+                return render_template("studentmypage.html", sid = sid, Fname = Fname, courses=courses, works=works)
+        return redirect(url_for('index'))
+
+# Page - Add Work
+@app.route("/studentmypage/<sid>/<Fname>/addwork")
+def addwork(sid, Fname):
+    return render_template("addwork.html")
+
+# Process - Add Work
+@app.route("/studentmypage/<sid>/<Fname>/_addwork", methods = ["POST"])
+def _addwork(sid, Fname):
+    client = MongoClient("mongodb+srv://test-user:1234@cluster0-zffwk.mongodb.net/test?retryWrites=true&w=majority")
+    db = client.recruit
+    userdata = db.users
+    if request.method == "POST":
+        obj = list()
+        obj.append(request.form["name"])
+        obj.append(request.form["description"])
+        obj.append(request.form["category"])
+        userdata.update({'sid':sid},{'$push': {'works':obj}})
+        return redirect(url_for('studentmypage', sid = sid, Fname = Fname))
+
+# Page - Add Course
+@app.route("/studentmypage/<sid>/<Fname>/addcourse")
+def addcourse(sid, Fname):
+    return render_template("addcourse.html")
+
+# Process - Add Course
+@app.route("/studentmypage/<sid>/<Fname>/_addcourse", methods = ["POST"])
+def _addcourse(sid, Fname):
+    client = MongoClient("mongodb+srv://test-user:1234@cluster0-zffwk.mongodb.net/test?retryWrites=true&w=majority")
+    db = client.recruit
+    userdata = db.users
+    obj=list()
+    for field in ["code", "name", "credit", "professor", "grade", "year", "semester"]:
+        obj.append(request.form[field])
+    userdata.update({'sid':sid},{'$push': {'courses':obj}})
+    return redirect(url_for('studentmypage', sid = sid, Fname = Fname))
