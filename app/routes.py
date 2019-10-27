@@ -4,8 +4,8 @@ from pymongo import MongoClient
 
 def connect_users():
     client = MongoClient("mongodb+srv://test-user:1234@cluster0-zffwk.mongodb.net/test?retryWrites=true&w=majority")
-    db = client.recruit
-    userdata = db.users
+    db = client['recruit']
+    userdata = db['users']
     return userdata.find()
 
 current_user=list()
@@ -36,16 +36,22 @@ def _signin():
 
 @app.route("/studentmypage/<sid>/<Fname>/")
 def studentmypage(sid, Fname):
+    # Calling Messages
+    client = MongoClient("mongodb+srv://test-user:1234@cluster0-zffwk.mongodb.net/test?retryWrites=true&w=majority")
+    db = client['recruit']
+    msgcollection = db['messages']
+    mymsg = msgcollection.find({'sid':sid})
+
     global current_user
     if current_user and current_user["sid"]==sid:
-        return render_template("studentmypage.html", sid = sid, Fname = Fname, courses=current_user['courses'], works=current_user['works'])
+        return render_template("studentmypage.html", sid = sid, Fname = Fname, courses=current_user['courses'], works=current_user['works'], messages=mymsg)
     else:
         userlist = connect_users()
         for user in userlist:
             if int(sid) == int(user['sid']):
                 courses = user['courses']
                 works = user['works']
-                return render_template("studentmypage.html", sid = sid, Fname = Fname, courses=courses, works=works)
+                return render_template("studentmypage.html", sid = sid, Fname = Fname, courses=courses, works=works, messages=mymsg)
         return redirect(url_for('index'))
 
 # Page - Add Work

@@ -36,7 +36,7 @@
             <p>Messages that Companies might have Sent you</p>
             {% for message in messages %}
             <div class="card">
-                <p>{{message[0]}} <em>from {{message[1]}}</em></p>
+                <p>{{message['contents']}} <em>from {{message['cid']}}</em></p>
 
                 <form action="_sendtocompany/{{message[1]}}" method="POST">
                     <input type="text" name="message" placeholder="        Reply message to {{message[1]}}" />
