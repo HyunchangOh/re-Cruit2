@@ -26,10 +26,10 @@
             <p>Messages that Student might have Sent you</p>
             {% for message in messages %}
             <div class="card">
-                <p>{{message['contents']}} <em>from {{message['sid']}}</em></p>
+                <p>{{message['contents']}} <em>from {{message['studentname']}}</em></p>
                 
-                <form action="_sendtostudent/{{message[3]}}" method="POST">
-                    <input type="text" name="message" placeholder="        Reply message to {{message[1]}}" />
+                <form action="_sendtostudent/{{message['sid']}}" method="POST">
+                    <input type="text" name="message" placeholder="        Reply message to {{message['sid']}}" />
                 </form>
             </div>
             {% endfor %}
@@ -38,16 +38,17 @@
             <h2>Your Position List</h2>
             <table>
                 <tr>
-                    <th>Position ID</th>
                     <th>Name</th>
                     <th>Description</th>
-                    <th>Required GPA</th>
+                    <th>Required Skills</th>
+                    <th>Monthly Wage</th>
                 </tr>
                 {% for position in positions %}
                 <tr>
-                    {% for element in position %}
-                    <td>{{element}}</td>
-                    {% endfor %}
+                    <td>{{position['name']}}</td>
+                    <td>{{position['description']}}</td>
+                    <td>{{position['skills']}}</td>
+                    <td>{{position['wage']}}</td>
                 </tr>
                 {% endfor %}
             </table>

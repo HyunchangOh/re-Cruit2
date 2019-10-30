@@ -61,16 +61,20 @@
                 </tr>
                 {% for course in courses %}
                 <tr>
-                    {% for element in course %}
-                    <td>{{element}}</td>
-                    {% endfor %}
+                    <td>{{course['code']}}</td>
+                    <td>{{course['name']}}</td>
+                    <td>{{course['credit']}}</td>
+                    <td>{{course['grade']}}</td>
+                    <td>{{course['professor']}}</td>
+                    <td>{{course['year']}}</td>
+                    <td>{{course['semester']}}</td>
                 </tr>
                 {% endfor %}
             </table>
             <p>
                 Add a Course you took. Tell companies more about your academic abilities.
             </p>
-            <button type="button" onClick="window.location.href='addcourse'">Add Course Now</button>
+            <button type="button" onClick="window.location.href='addcourse'" >Add Course Now</button>
             
             <h2>
                 Your Work List
@@ -79,13 +83,17 @@
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
+                    <th>Duration</th>
+                    <th>Worked As..</th>
                     <th>Category</th>
                 </tr>
                 {% for work in works %}
                 <tr>
-                    {% for element in work %}
-                    <td>{{element}}</td>
-                    {% endfor %}
+                    <td>{{work['workname']}}</td>
+                    <td>{{work['description']}}</td>
+                    <td>{{work['duration']}}</td>
+                    <td>{{work['occupation']}}</td>
+                    <td>{{work['category']}}</td>
                 </tr>
                 {% endfor %}
             </table>

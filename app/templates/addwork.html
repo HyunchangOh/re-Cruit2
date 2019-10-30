@@ -16,9 +16,11 @@
     <div class="contents">
         <h3>Glad to see you have done some work. Enter work details.</h3>
         <form action="_addwork" method="POST">
-            <input type="text" name="name" placeholder="        Work Name">
-            <input type="text" name="description" placeholder="        Work Description">
-            <input type="text" name="category" placeholder="        Work Category">
+            <input required type="text" name="name" placeholder="        Work Name">
+            <input required type="text" name="description" placeholder="        Work Description">
+            <input required type="text" name="category" placeholder="        Work Category">
+            <input required type="text" name="duration" placeholder="        Duration">
+            <input required type="text" name="occupation" placeholder="        You worked as..">
 
             <button type="submit">Add this work and return</button>
         </form>

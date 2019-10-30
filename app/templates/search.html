@@ -19,27 +19,25 @@
 
         <p>Search Results...</p>
 
-        {% if students %}
+        {% if students.count() %}
         <h2>Students</h2>
         <table class="fulltable">
             <tr>
-                <th>Student ID</th>
-                <th>School</th>
-                <th>Email</th>
                 <th>Name</th>
+                <th>Institution</th>
+                <th>Major</th>
             </tr>
             {% for student in students %}
             <tr>
-                <td>{{student[0]}}</td>
-                <td>{{student[1]}}</td>
-                <td>{{student[2]}}</td>
-                <td>{{student[3]}} {{student[4]}}</td>
+                <td>{{student['Fname']}} {{student['Lname']}}</td>
+                <td>{{student['Institution']}}</td>
+                <td>{{student['Major']}}</td>
             </tr>
             {% endfor %}
         </table>
         {% endif %}
 
-        {% if companies %}        
+        {% if companies.count() %}        
         <h2>Companies</h2>
         <table class="fulltable">
             <tr>
@@ -49,47 +47,53 @@
             </tr>
             {% for company in companies %}
             <tr>
-                <td>{{company[0]}}</td>
-                <td>{{company[1]}}</td>
-                <td>{{company[2]}}</td>
+                <td>{{company['name']}}</td>
+                <td>{{company['email']}}</td>
+                <td>{{company['address']}}</td>
             </tr>
             {% endfor %}
         </table>
         {% endif %}
 
-        {% if positions %}
+        {% if positions.count() %}
         <h2>Positions</h2>
         <table class="fulltable"> 
             <tr>
-                <th>Name</th>
+                <th>Job Title</th>
+                <th>Offered by</th>
                 <th>Description</th>
-                <th>Required GPA</th>
+                <th>Required Skills</th>
             </tr>
             {% for position in positions %}
             <tr>
-                <td>{{position[0]}}</td>
-                <td>{{position[1]}}</td>
-                <td>{{position[2]}}</td>
+                <td>{{position['name']}}</td>
+                <td>{{position['company']}}</td>
+                <td>{{position['description']}}</td>
+                <td>{{position['skills']}}</td>
             </tr>
             {% endfor %}
         </table>
         {% endif %}
 
-        {% if courses %}
+        {% if courses.count() %}
         <h2>Courses</h2>
         <table class="fulltable">
             <tr>
                 <th>Code</th>
+                <th>Open At</th>
                 <th>Name</th>
                 <th>Credit</th>
                 <th>Professor</th>
             </tr>
             {% for course in courses %}
             <tr>
-                <td>{{course[0]}}</td>
-                <td>{{course[1]}}</td>
-                <td>{{course[2]}}</td>
-                <td>{{course[3]}}</td>
+                
+                <td>{{course['code']}}</td>
+                <td>{{course['Institution']}}</td>
+                <td>{{course['name']}}</td>
+                <td>{{course['credit']}}</td>
+                <td>{{course['Professor']}}</td>
+                
             </tr>
             {% endfor %}
         </table>
