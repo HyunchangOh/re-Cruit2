@@ -128,29 +128,29 @@ def _addcourse(username, Fname):
     return redirect(url_for('studentmypage', username = username, Fname = Fname)) 
 
 # Process - Send Message to Company
-@app.route("/studentmypage/<sid>/<Fname>/_sendtocompany", methods = ["POST"])
-def _sendtocompany(sid, Fname):
+@app.route("/studentmypage/<username>/<Fname>/_sendtocompany", methods = ["POST"])
+def _sendtocompany(username, Fname):
     if request.method == "POST":
         global db
         msgcollection = db.messages
 
         message = request.form['message']
         name = request.form['name']
-        msgcollection.insert_one({'sid':sid, 'cid':name, 'contents':message, 'towhom': 'company'})
+        msgcollection.insert_one({'username':username, 'cid':name, 'contents':message, 'towhom': 'company'})
 
-        return redirect(url_for("studentmypage", sid = sid, Fname = Fname))
+        return redirect(url_for("studentmypage", username=username, Fname=Fname))
 
 # Process - Send Message to Company via Direct Reply
-@app.route("/studentmypage/<sid>/<Fname>/_sendtocompany/<name>", methods = ["POST"])
-def _sendtothecompany(sid, Fname, name):
+@app.route("/studentmypage/<username>/<Fname>/_sendtocompany/<name>", methods = ["POST"])
+def _sendtothecompany(username, Fname, name):
     if request.method == "POST":
         global db
         msgcollection = db.messages
 
         message = request.form['message']
-        msgcollection.insert_one({'sid':sid, 'cid':name, 'contents':message, 'towhom':'company'})
+        msgcollection.insert_one({'username':username, 'cid':name, 'contents':message, 'towhom':'company'})
 
-        return redirect(url_for("studentmypage", sid = sid, Fname = Fname))
+        return redirect(url_for("studentmypage", username = username, Fname = Fname))
 
 #--------------------------------------------------------------------------------
 # Company
@@ -228,7 +228,7 @@ def _sendtothestudent(name, sid):
 
 @app.route("/search")
 def search():
-    return render_template("search.html")
+    return render_template("search.html", students=[], companies=[], courses=[],positions=[])
 
 # Process - Search
 @app.route("/_search", methods=["POST"])
