@@ -71,4 +71,23 @@ User's workflow is simple. All they can do is to update their profile, or send m
 
 ## 03 How to Use
 
-Currently, the database safety issues have been detected, so the service is temporarily down for testing.
+install flask.
+
+```
+pip install flask
+```
+
+install PyMongo
+
+```
+pip install PyMongo
+```
+
+In the root diretory, run the following command
+
+```
+flask run
+```
+
+
+
